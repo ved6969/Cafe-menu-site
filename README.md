@@ -1,6 +1,4 @@
-That's a fantastic and highly relevant project! A digital cafe menu with a QR scanner is a great way to showcase your skills. Here are some attractive and professional descriptions for your GitHub repository, complete with emojis.
 
-Option 1: The Modern & Sleek
 ✨ Digital Cafe Menu: QR-Powered Dining Experience ✨
 
 This project introduces a modern, contactless solution for cafes and restaurants: a digital menu card accessible via a QR code. Built to provide a seamless and hygienic ordering experience, this web application is a perfect blend of style and functionality.
