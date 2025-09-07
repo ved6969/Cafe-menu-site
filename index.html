@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Corner Cafe - Digital Menu</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Fixed Transparent Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>Jadhav's Coffee House</h1>
+                <p class="tagline">Delicious moments, delivered to your table</p>
+            </div>
+            <div class="nav-menu">
+                <a href="#drinks" class="nav-link">Drinks</a>
+                <a href="#desserts" class="nav-link">Desserts</a>
+                <a href="#sandwiches" class="nav-link">Sandwiches</a>
+                <a href="#pizza" class="nav-link">Pizza</a>
+                <a href="#burgers" class="nav-link">Burgers</a>
+                <div class="cart-icon" id="cartIcon">
+                    <span class="cart-emoji">🛒</span>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="container">
+                <h2>Welcome to Jadhav's Coffee House</h2>
+                <p>Explore our delicious menu and order directly to your table!</p>
+                <div class="cafe-info">
+                    <p>📞 +91 98765 43210 | 📧 orders@jadhavscoffeehouse.com</p>
+                    <p>🕐 8:00 AM - 10:00 PM | 📍 123 Main Street, City Center</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Sections -->
+        <section id="drinks" class="menu-section">
+            <div class="container">
+                <h2 class="section-title">☕ Drinks</h2>
+                <div class="menu-grid" id="drinksGrid"></div>
+            </div>
+        </section>
+
+        <section id="desserts" class="menu-section">
+            <div class="container">
+                <h2 class="section-title">🍰 Desserts</h2>
+                <div class="menu-grid" id="dessertsGrid"></div>
+            </div>
+        </section>
+
+        <section id="sandwiches" class="menu-section">
+            <div class="container">
+                <h2 class="section-title">🥪 Sandwiches</h2>
+                <div class="menu-grid" id="sandwichesGrid"></div>
+            </div>
+        </section>
+
+        <section id="pizza" class="menu-section">
+            <div class="container">
+                <h2 class="section-title">🍕 Pizza</h2>
+                <div class="menu-grid" id="pizzaGrid"></div>
+            </div>
+        </section>
+
+        <section id="burgers" class="menu-section">
+            <div class="container">
+                <h2 class="section-title">🍔 Burgers</h2>
+                <div class="menu-grid" id="burgersGrid"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Order</h3>
+            <button class="close-cart" id="closeCart">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-total">
+            <div class="total-amount">
+                <strong>Total: ₹<span id="totalAmount">0</span></strong>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Checkout Modal -->
+    <div class="modal hidden" id="checkoutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Checkout</h3>
+                <button class="close-modal" id="closeCheckout">✕</button>
+            </div>
+            <form class="checkout-form" id="checkoutForm">
+                <div class="form-group">
+                    <label class="form-label" for="customerName">Full Name*</label>
+                    <input type="text" id="customerName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="customerPhone">Phone Number*</label>
+                    <input type="tel" id="customerPhone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="tableNumber">Table Number*</label>
+                    <input type="number" id="tableNumber" class="form-control" min="1" max="50" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="specialInstructions">Special Instructions</label>
+                    <textarea id="specialInstructions" class="form-control" rows="3" placeholder="Any special requests or dietary requirements..."></textarea>
+                </div>
+                <div class="payment-section">
+                    <h4>Payment Method</h4>
+                    <div class="payment-options">
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="cash" checked>
+                            <span>💵 Cash on Delivery</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="card">
+                            <span>💳 Card Payment</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="upi">
+                            <span>📱 UPI Payment</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="order-summary">
+                    <h4>Order Summary</h4>
+                    <div id="orderSummary"></div>
+                    <div class="final-total">
+                        <strong>Total: ₹<span id="finalTotal">0</span></strong>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div class="modal hidden" id="confirmationModal">
+        <div class="modal-content">
+            <div class="confirmation-content">
+                <div class="success-icon">✅</div>
+                <h3>Order Confirmed!</h3>
+                <p>Your order has been successfully placed.</p>
+                <div class="order-details">
+                    <p><strong>Order ID:</strong> <span id="orderID"></span></p>
+                    <p><strong>Table Number:</strong> <span id="confirmTableNumber"></span></p>
+                    <p><strong>Estimated Time:</strong> 15-20 minutes</p>
+                </div>
+                <button class="btn btn--primary" id="newOrderBtn">Place New Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Jadhav's Coffee House</h4>
+                    <p>Delicious moments, delivered to your table</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank">📘 Facebook</a>
+                        <a href="https://www.instagram.com/_vedant.j__7/?next=%2F" target="_blank">📷 Instagram</a>
+                        <a href="https://twitter.com/_vedant_jadhav" target="_blank">🐦 Twitter</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📞 +91 9765029837</p>
+                    <p>📧 orders@jadhavscoffeehouse.com</p>
+                    <p>📍 Sector no 25, Area 44, Akrudi</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Opening Hours</h4>
+                    <p>Monday - Sunday</p>
+                    <p>8:00 AM - 10:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Jadhav's Coffee House. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
